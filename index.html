@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>컴활 2급 퀴즈</title>
+
+<style>
+  body { font-family: Arial; padding: 20px; }
+  .question { margin-bottom: 30px; }
+  .explanation { display: none; background: #f4f4f4; padding: 10px; margin-top: 10px; }
+  .answer { display: none; color: blue; font-weight: bold; }
+</style>
+</head>
+
+<body>
+
+<h2>컴퓨터활용능력 2급 퀴즈</h2>
+
+<div id="quiz">
+
+  <!-- 문제 1 -->
+  <div class="question">
+    <p>1. 다음 설명에 해당하는 것은?</p>
+    <p>컴퓨터 프로그램으로 3차원 애니메이션을 만드는 과정</p>
+
+    <input type="radio" name="q1" value="1"> 안티앨리어싱<br>
+    <input type="radio" name="q1" value="2"> 렌더링<br>
+    <input type="radio" name="q1" value="3"> 인터레이싱<br>
+    <input type="radio" name="q1" value="4"> 메조틴트<br>
+
+    <br>
+    <button onclick="showAnswer('a1')">정답 보기</button>
+    <button onclick="toggleExplanation('e1')">해설 보기/숨기기</button>
+
+    <div id="a1" class="answer">정답: 2번 (렌더링)</div>
+
+    <div id="e1" class="explanation">
+      렌더링은 3차원 모델에 색상과 명암을 넣어 실제처럼 보이게 만드는 과정입니다.
+    </div>
+  </div>
+
+  <!-- 문제 2 -->
+  <div class="question">
+    <p>2. SUM 함수의 기능은?</p>
+
+    <input type="radio" name="q2" value="1"> 평균<br>
+    <input type="radio" name="q2" value="2"> 합계<br>
+    <input type="radio" name="q2" value="3"> 개수<br>
+    <input type="radio" name="q2" value="4"> 최대값<br>
+
+    <br>
+    <button onclick="showAnswer('a2')">정답 보기</button>
+    <button onclick="toggleExplanation('e2')">해설 보기/숨기기</button>
+
+    <div id="a2" class="answer">정답: 2번 (합계)</div>
+
+    <div id="e2" class="explanation">
+      SUM 함수는 숫자들의 합계를 구하는 함수입니다.
+    </div>
+  </div>
+
+</div>
+
+<button onclick="gradeQuiz()">채점하기</button>
+
+<h3 id="result"></h3>
+
+<script>
+  const correctAnswers = {
+    q1: "2",
+    q2: "2"
+  };
+
+  function showAnswer(id) {
+    document.getElementById(id).style.display = "block";
+  }
+
+  function toggleExplanation(id) {
+    const el = document.getElementById(id);
+    el.style.display = (el.style.display === "none") ? "block" : "none";
+  }
+
+  function gradeQuiz() {
+    let score = 0;
+    let total = Object.keys(correctAnswers).length;
+
+    for (let q in correctAnswers) {
+      let selected = document.querySelector(`input[name="${q}"]:checked`);
+      if (selected && selected.value === correctAnswers[q]) {
+        score++;
+      }
+    }
+
+    document.getElementById("result").innerText =
+      "점수: " + score + " / " + total;
+  }
+</script>
+
+</body>
+</html>
